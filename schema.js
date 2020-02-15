@@ -22,4 +22,4 @@ Voter.index({zip : 1});
 Voter.index({history : 1});
 
 // compile and export as model
-module.exports = mongoos.model('Voter', Voter);
+module.exports = mongoose.model('Voter', Voter);
