@@ -42,11 +42,10 @@ fs.readFile('voters.csv', function(error, data){
 	}
 });
 
-saves = voters.map(voter => voter.save)
+saves = voters.map(voter => voter.save())
 
 connect() // database time
-mongoose.connection.dropDatabase()
-	.then(_ => Promise.all(saves))
+Promise.all(saves)
 	.then(_ => mongoose.connection.close())
   .then(_ => console.log('Database populated.'))
 	.catch(error => console.error(error.stack));
