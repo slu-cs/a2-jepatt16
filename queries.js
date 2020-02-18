@@ -19,7 +19,8 @@ const queries = [
 
 Promise.all(queries)
   .then(function(results){
-    console.log('Voter\'s whose first name is "STARR": ', results[0])
+	console.log('All voters: ', results[0])
+    console.log('Voter\'s whose first name is "STARR": ', results[1])
     mg.connection.close();
 	})
 	.catch(function(error) {
