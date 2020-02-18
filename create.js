@@ -43,10 +43,7 @@ fs.readFile('voters.csv', function(error, data){
 });
 
 connect() // database time
-	.then(function(){
-		console.log("Connected.")
-		mongoose.connection.dropDatabase();
-	})
+mongoose.connection.dropDatabase()
 	.then(function(){
 		let i = 0;
 		for (const voter of voters){
