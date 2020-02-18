@@ -42,16 +42,18 @@ fs.readFile('voters.csv', function(error, data){
 	}
 });
 
-connect(); // database time
-mongoose.connection.dropDatabase()
+connect() // database time
+	.then(function(){
+		console.log("Connected.")
+		mongoose.connection.dropDatabase();
+	})
 	.then(function(){
 		let i = 0;
 		for (const voter of voters){
 			voter.save();
-			console.log(i);
 			i++;
 		}
 	})
 	.then(_ => mongoose.connection.close())
-  .then(_ => console.log('database populated'))
+  .then(_ => console.log('Database populated.'))
 	.catch(error => console.error(error.stack));
