@@ -53,5 +53,5 @@ mongoose.connection.dropDatabase()
 		}
 	})
 	.then(_ => mongoose.connection.close())
-        .then(_ => console.log('database populated'))
+  .then(_ => console.log('database populated'))
 	.catch(error => console.error(error.stack));
