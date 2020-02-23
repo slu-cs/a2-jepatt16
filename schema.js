@@ -21,12 +21,5 @@ Voter.index({last : 1});
 Voter.index({zip : 1});
 Voter.index({history : 1});
 
-// election object, constructs from a string of length 4
-const Election = function(s){
-	this.type = s.slice(0, 2);
-	this.year = parseInt(s.slice(2));
-};
-
 // compile and export as model
-exports.Voter = mongoose.model('Voter', Voter);
-exports.Election = Election;
+module.exports = mongoose.model('Voter', Voter);

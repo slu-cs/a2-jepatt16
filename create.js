@@ -12,7 +12,7 @@ connect(); // database time
 const mkhistory = function(s){
 	let elections = [];
 	for (let i = 0; i < s.length; i += 4){
-		elections.push(new Voter.Election(s.slice(i, i + 4)));
+		elections.push(s.slice(i, i + 4));
 	}
 	return elections;
 };
@@ -27,7 +27,7 @@ fs.readFile('voters.csv', function(error, data){
 	for (const line of data_arr){
 		if (line){
 			const line_arr = line.split(',');
-			voters.push(new Voter.Voter({
+			voters.push(new Voter({
 				first: line_arr[0],
 				last: line_arr[1],
 				zip: parseInt(line_arr[2]),
