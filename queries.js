@@ -22,6 +22,7 @@ const queries = [
 Promise.all(queries)
   .then(function(results){
 		console.log('Number of voters in Canton zip: ', results[0].length);
+
     console.log('Voter\'s whose first name is "STARR": ', results[1].map(voter => (voter.first + ' ' + voter.last)));
 
 		console.log('How many people voted in the 2016 general election: ', results[2].map(voter => voter.history).filter(history => history.includes('GE16')).length);
@@ -32,6 +33,4 @@ Promise.all(queries)
 
 		mg.connection.close();
 	})
-	.catch(function(error) {
-    console.error(error.stack);
-  });
+	.catch(error => console.error(error.stack));
