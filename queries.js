@@ -23,8 +23,9 @@ const queries = [
 // names such as "Ackerma" (presumably originally "Ackerman") or,
 // even more suspiciously, "Ewma" (almost certainly a corruption of "Newman")
 // This is a problem with the file itself (or at least my copy of it), and not
-// the way I am reading the file in create.js. I know this because this quirk
-// is present in the original voters.csv file when I view in in nano
+// the way I am reading the file in create.js. I know this is the case
+// because this quirk is present in the original voters.csv file
+// when I view it in nano
 Promise.all(queries)
   .then(function(results){
 		console.log('Number of voters in Canton zip: ', results[0].length);
