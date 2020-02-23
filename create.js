@@ -6,17 +6,13 @@ const connect = require('./db.js');
 const Voter = require('./schema.js');
 const fs = require('fs');
 
-// election object, constructs from a string of length 4
-const Election = function(s){
-	this.type = s.slice(0, 2);
-	this.year = parseInt(s.slice(2));
-};
+connect(); // database time
 
 // helper function to make an array of elections from a string
 const mkhistory = function(s){
 	let elections = [];
 	for (let i = 0; i < s.length; i += 4){
-		elections.push(new Election(s.slice(i, i + 4)));
+		elections.push(new Voter.Election(s.slice(i, i + 4)));
 	}
 	return elections;
 };
@@ -31,21 +27,18 @@ fs.readFile('voters.csv', function(error, data){
 	for (const line of data_arr){
 		if (line){
 			const line_arr = line.split(',');
-			const a_voter = new Voter({
+			voters.push(new Voter.Voter({
 				first: line_arr[0],
 				last: line_arr[1],
 				zip: parseInt(line_arr[2]),
 				history : mkhistory(line_arr[3])
-			});
-			voters.push(a_voter);
+			}));
 		}
 	}
 });
 
-saves = voters.map(voter => voter.save())
-
-connect() // database time
-Promise.all(saves)
+mongoose.connection.dropDatabase()
+	.then(_ => Promise.all(voters.map(voter => voter.save())))
 	.then(_ => mongoose.connection.close())
   .then(_ => console.log('Database populated.'))
 	.catch(error => console.error(error.stack));
